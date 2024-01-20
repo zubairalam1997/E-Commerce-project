@@ -86,7 +86,7 @@ const Navbar = () => {
                   <Link to={'/'} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer">
                     <img
                       className="inline-block w-10 h-10 rounded-full"
-                      src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                      src="https://img.freepik.com/free-photo/portrait-young-man-with-dark-curly-hair_176532-8137.jpg?size=626&ext=jpg&ga=GA1.1.1018011517.1676957932&semt=sph"
                       alt="Dan_Abromov" />                                        </Link>
                 </div>
               </div>
@@ -94,7 +94,7 @@ const Navbar = () => {
               <div className="border-t border-gray-200 px-4 py-6">
                 <a href="#" className="-m-2 flex items-center p-2">
                   <img
-                    src="img/indiaflag.png"
+                    src="https://ecommerce-sk.vercel.app/img/indiaflag.png"
                     alt="flg img"
                     className="block h-auto w-5 flex-shrink-0"
                   />
@@ -133,7 +133,7 @@ const Navbar = () => {
             <div className="ml-4 flex lg:ml-0">
               <Link to={'/'} className='flex'>
                 <div className="flex ">
-                  <h1 className=' text-2xl font-bold text-black  px-2 py-1 rounded' style={{ color: mode === 'dark' ? 'white' : '', }}>E-Bharat</h1>
+                  <h1 className=' text-2xl font-bold text-black  px-2 py-1 rounded' style={{ color: mode === 'dark' ? 'white' : '', }}>Zubair E-Com</h1>
                 </div>
               </Link>
             </div>
@@ -171,7 +171,7 @@ const Navbar = () => {
                 <a href="#" className="flex items-center text-gray-700 ">
                   <img
                     className="inline-block w-10 h-10 rounded-full"
-                    src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                    src="https://img.freepik.com/free-photo/portrait-young-man-with-dark-curly-hair_176532-8137.jpg?size=626&ext=jpg&ga=GA1.1.1018011517.1676957932&semt=sph"
                     alt="Dan_Abromov" />
                 </a>
               </div>
