@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword ,signInWithEmailAndPassword} from 'firebase/auth';
 import { auth, fireDB } from '../../firebase/FirebaseConfig';
 import { Timestamp, addDoc, collection } from 'firebase/firestore';
 import MyContext from '../../context/data/myContext';
@@ -16,17 +16,27 @@ function Signup() {
 
     const context = useContext(MyContext);
     const {loading , setLoading} = context;
+    const navigate = useNavigate();
 
-    const signup = async ()=>{
+    const signup = async () => {
         setLoading(true);
+    
         if (name === "" || email === "" || password === "") {
-            return toast.error("All fields are required")
+            setLoading(false);
+            return toast.error("All fields are required");
         }
+    
         try {
             const users = await createUserWithEmailAndPassword(auth, email, password);
-
-            console.log(users)
-
+    
+            console.log(users);
+    
+            if (!users.user) {
+                // User creation unsuccessful
+                setLoading(false);
+                throw new Error("Signup incomplete. User not created.");
+            }
+    
             const user = {
                 name: name,
                 uid: users.user.uid,
@@ -35,20 +45,30 @@ function Signup() {
             }
             const userRef = collection(fireDB, "users");
             await addDoc(userRef, user);
-            toast.success("Signed up Successfully");
+            const result = await signInWithEmailAndPassword(auth , email ,password); 
+            localStorage.setItem('user', JSON.stringify(result));
+            toast.success("Sign up Successfully");
             setEmail("");
             setName("");
             setPassword("");
             setLoading(false);
+            navigate('/');
             
-        }
-        catch(error) {
+        } catch (error) {
             console.log(error);
             setLoading(false);
+    
+            if (error.message) {
+                // Display the error message in a toast
+                toast.error(`Signup incomplete: ${error.message}`);
+            } else {
+                toast.error("Error during signup. Please try again.");
+            }
         }
-        console.log(name , email ,password);
-    }
-   
+    
+        //console.log(name, email, password);
+    };
+    
     return (
         <div className=' flex justify-center items-center h-screen'>
            {loading && <Loader/>}

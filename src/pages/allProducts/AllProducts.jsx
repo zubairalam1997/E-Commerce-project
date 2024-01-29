@@ -25,7 +25,8 @@ function Allproducts() {
       localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems])
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    setSearchkey("");
   }, [])
 
   return (
@@ -39,10 +40,10 @@ function Allproducts() {
                 </div>
 
                 <div className="flex flex-wrap -m-4">
-                    {product.filter((obj)=> obj.title.toLowerCase().includes(searchkey))
-                     .filter((obj) => obj.category.toLowerCase().includes(filterType))
-                     .filter((obj) => obj.price.includes(filterPrice)).map((item, index) => {
-                        const { title, price, description, imageUrl,id } = item;
+                    {product.filter((obj) => obj.title.toLowerCase().includes(searchkey))
+                            .filter((obj) => obj.category.toLowerCase().includes(filterType.toLowerCase()))
+                            .filter((obj) => obj.price.includes(filterPrice)).map((item, index) => {
+                        const { title, price, category, imageUrl,id } = item;
                         return (
                             <div onClick={()=> window.location.href = `/productinfo/${id}`}   key={index} className="p-4 md:w-1/4  drop-shadow-lg " >
                                 <div className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
@@ -52,7 +53,7 @@ function Allproducts() {
                                     <div className="p-5 border-t-2">
                                         <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1" style={{ color: mode === 'dark' ? 'white' : '', }}>E-Bharat</h2>
                                         <h1 className="title-font text-lg font-medium text-gray-900 mb-3" style={{ color: mode === 'dark' ? 'white' : '', }}>{title}</h1>
-                                        {/* <p className="leading-relaxed mb-3">{item.description.}</p> */}
+                                        <p className="leading-relaxed mb-3">{category}</p>
                                         <p className="leading-relaxed mb-3" style={{ color: mode === 'dark' ? 'white' : '' }}>₹{price}</p>
                                         <div className=" flex justify-center">
                                             <button type="button" 

@@ -6,11 +6,11 @@ import { addToCart, deleteFromCart } from "../../redux/cartSlice";
 
 function ProductCard() {
   const context = useContext(myContext);
-  const { mode, product, searchkey, filterType, filterPrice } = context;
+  const { mode, product, searchkey,setSearchkey, filterType, filterPrice } = context;
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
-  console.log(cartItems);
+  
 
   // add to cart
   const addCart = (product) => {
@@ -20,6 +20,7 @@ function ProductCard() {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
+    setSearchkey("");
   }, [cartItems]);
 
   return (
@@ -38,12 +39,12 @@ function ProductCard() {
         <div className="flex flex-wrap -m-4">
           {product
             .filter((obj) => obj.title.toLowerCase().includes(searchkey))
-            .filter((obj) => obj.category.toLowerCase().includes(filterType))
+            .filter((obj) => obj.category.toLowerCase().includes(filterType.toLowerCase()))
             .filter((obj) => obj.price.includes(filterPrice)).slice(0,8)
             .map((item, index) => {
-              const { title, price, description, imageUrl,id } = item;
+              const { title, price, category,  imageUrl,id } = item;
               return (
-                <div onClick={()=> window.location.href = `/productinfo/${id}`} className="p-4 md:w-1/4  drop-shadow-lg ">
+                <div onClick={()=> window.location.href = `/productinfo/${id}`} key={index} className="p-4 md:w-1/4  drop-shadow-lg ">
                   <div
                     className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
                     style={{
@@ -63,7 +64,7 @@ function ProductCard() {
                         className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
-                        E-Bharat
+                        Zubair E-Com 
                       </h2>
                       <h1
                         className="title-font text-lg font-medium text-gray-900 mb-3"
@@ -71,7 +72,7 @@ function ProductCard() {
                       >
                         {title}
                       </h1>
-                      {/* <p className="leading-relaxed mb-3">{item.description.}</p> */}
+                      <p className="leading-relaxed mb-3">{category}</p>
                       <p
                         className="leading-relaxed mb-3"
                         style={{ color: mode === "dark" ? "white" : "" }}

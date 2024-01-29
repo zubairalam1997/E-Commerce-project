@@ -25,14 +25,23 @@ function Login() {
         }
         catch(error){
             console.log('Error : ', error.message);
+            if(error){
+                toast.error("enter valid details");
+            }
+            else{
+                toast.error("Try again")
+            }
             setLoading(false);
         }
     }
   
     return (
         <div className=' flex justify-center items-center h-screen'>
+            
              {loading && <Loader/>}
             <div className=' bg-gray-800 px-10 py-10 rounded-xl '>
+            <h3 className='text-gray-500'>For Admin use <h3> email:  admin@gmail.com</h3>
+             psswd: 123456 </h3>
                 <div className="">
                     <h1 className='text-center text-white text-xl mb-4 font-bold'>Login</h1>
                 </div>

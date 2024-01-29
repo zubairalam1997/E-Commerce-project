@@ -6,13 +6,13 @@ import Cart from './pages/cart/Cart';
 import MyState from './context/data/MyState';
 import Dashboard from './pages/admin/dashboard/Dashboard';
 import Admin from './pages/admin/Admin';
-import NoPage from './pages/nopage/NoPage';
 import Login from './pages/registration/Login';
 import Signup from './pages/registration/Signup';
 import ProductInfo from './pages/productinfo/ProductInfo';
 import AddProduct from './pages/admin/page/AddProduct';
+import NoPage from './pages/nopage/NoPage';
 import UpdateProduct from './pages/admin/page/UpdateProduct';
-
+import Allproducts from './pages/allProducts/AllProducts';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,6 +32,8 @@ const App = () => {
         <Route path="/productinfo/:id" element={<ProductInfo/>}/>
         <Route path="/addproduct" element={<ProtectedRoutesForAdmin> <AddProduct/></ProtectedRoutesForAdmin>}/>
         <Route path="/updateproduct" element={<ProtectedRoutesForAdmin> <UpdateProduct/></ProtectedRoutesForAdmin>}/>
+        <Route path="/allproducts" element={ <Allproducts/>}/>
+        <Route path="/*" element={ <NoPage/>}/>
        
       </Routes>
        <ToastContainer/>
@@ -53,7 +55,7 @@ export const ProtectedRoutes = ({ children }) => {
 
 export const ProtectedRoutesForAdmin = ({children})=>{
   const admin = JSON.parse(localStorage.getItem('user'));
-  if(admin.user.email === "zubairalamraza@gmail.com"){
+  if(admin.user.email === "admin@gmail.com"){
     return children;
   }
   else{

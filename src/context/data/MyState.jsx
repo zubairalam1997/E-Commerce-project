@@ -88,12 +88,16 @@ const MyState = (props) => {
       setLoading(false)
     }
   }
+  useEffect(()=>{
+    getProductData();
+  },[]);
 
   const edithandle = (item) => {
-    setProducts(item)
+    setProducts(item);
   }
   // update product
-  const updateProduct = async () => {
+  
+  const updateProduct = async()=> {
     setLoading(true)
     try {
 
@@ -101,7 +105,7 @@ const MyState = (props) => {
         toast.success("Product Updated successfully")
         setTimeout(() => {
             window.location.href = '/dashboard'
-        }, 700);
+        }, 500);
         getProductData();
         setLoading(false)
 
@@ -177,7 +181,7 @@ const MyState = (props) => {
 
 
   useEffect(() => {
-    getProductData();
+   
     getOrderData();
     getUserData();
 

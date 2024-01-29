@@ -13,7 +13,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const User = JSON.parse(localStorage.getItem('user'));
-  console.log(User);
+  
 
   const logout = ()=>{
     localStorage.removeItem("user");
@@ -60,11 +60,18 @@ const Navbar = () => {
                   <RxCross2 />
                 </button>
               </div>
+              
               <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                
-                {/* <Link to={'/allproducts'} className="text-sm font-medium text-gray-900 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  All Products
-                </Link> */}
+              <div className="flow-root">
+                  <Link to={'/'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-gray-900">
+                    Home
+                  </Link>
+                </div>
+                <div className="flow-root">
+                  <Link to={'/allproducts'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-gray-900">
+                    All products
+                  </Link>
+                </div>
                 <div className="flow-root">
                   <Link to={'/order'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-gray-900">
                     Order
@@ -72,16 +79,20 @@ const Navbar = () => {
                 </div>
 
                 <div className="flow-root">
-                  {User?.user?.email==='zubairalamraza@gmail.com' ? <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  {User?.user?.email==='admin@gmail.com' ? <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     admin
                   </Link> : "" }
                 </div>
 
-                <div className="flow-root">
+                {User ? <div className="flow-root">
                   <a onClick={logout} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Logout
                   </a>
-                </div>
+                </div> :<div className="flow-root">
+                    <Link to={'/signup'}  className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                      Signup
+                    </Link>
+                  </div>}
                 <div className="flow-root">
                   <Link to={'/'} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer">
                     <img
@@ -144,24 +155,29 @@ const Navbar = () => {
                 <Link to={'/'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
                   Home
                 </Link>
-                <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Order
+                <Link to={'/allproducts'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  All Products
                 </Link>
-                {User?.user?.email=== 'zubairalamraza@gmail.com' ?<Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                {User ? <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Order
+                </Link> : ""}
+                {User?.user?.email=== 'admin@gmail.com' ?<Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
                   Admin
-                </Link> : "" }
+                </Link> :"" }
                 
 
-                <a onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Logout
-                </a>
+                {User ?  <a onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                    Logout
+                  </a> :  <Link to={'/login'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Login
+                </Link>}
               </div>
 
               <div className="hidden lg:ml-8 lg:flex">
                 <a href="#" className="flex items-center text-gray-700 ">
                   <img
                     src="https://ecommerce-sk.vercel.app/img/indiaflag.png"
-                    alt=""
+                    alt="flg"
                     className="block h-auto w-5 flex-shrink-0"
                   />
                   <span className="ml-3 block text-sm font-medium" style={{ color: mode === 'dark' ? 'white' : '', }}>INDIA</span>
@@ -195,7 +211,7 @@ const Navbar = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                   </svg>
 
-                  <span className="ml-2 text-sm font-medium text-gray-700 group-" style={{ color: mode === 'dark' ? 'white' : '', }}>{cartItems.length} </span>
+                  <span className="ml-1 text-xs font-1 text-white bg-red-500 px-[0.3rem]  border rounded-full group-" style={{ color: mode === 'dark' ? 'white' : '', }}>{cartItems.length} </span>
                   <span className="sr-only">items in cart, view bag</span>
                 </Link>
               </div>
